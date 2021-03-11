@@ -1,4 +1,5 @@
-###exercise 47 from ben stephenson's "the python workbook". unfinished.
+###exercise 47 from ben stephenson's "the python workbook".
+###the bit with creating an extra list of the first days is inelegant, but I don't have a better idea right now.
 
 print('Enter the month and day:')
 m, d = input().split(',')
@@ -19,6 +20,8 @@ first_days = {  20: 'Aquarius',
                 296: 'Scorpio',
                 326: 'Sagittarius',
                 356: 'Capricorn' }
+
+list_of_first_days = [i for i in first_days.keys()]
 
 monthdays = { 'january': 31,
               'february': 28,
@@ -44,13 +47,13 @@ for i in monthdays.keys():
     total_days = total_days - monthdays[i] + day_of_month
     break
 
-if total_days < 20:
+
+if total_days < 20 or total_days >= 356:
   sign = 'Capricorn'
 else:
-  for i in range(first_days.keys()):
-    sign = first_days[i]
-    if i == 11 or first_days.keys()[i + 1] > total_days:
-      break
+  for i in range(len(list_of_first_days)):
+    if total_days >= list_of_first_days[i] and (total_days < list_of_first_days[i+1]):
+      sign = first_days.get(list_of_first_days[i])
 
 print(sign)
 print(total_days)
